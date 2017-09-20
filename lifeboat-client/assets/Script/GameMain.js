@@ -4,6 +4,7 @@ function initModules() {
   cc.just.net.host = '127.0.0.1:3000'
   cc.just.net.connect((err, data) => {
   })
+  cc.just.http = require('Http')
 }
 
 cc.Class({
@@ -25,7 +26,6 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
       initModules()
-      cc.director.loadScene("hall")
     },
 
     // called every frame, uncomment this function to activate update callback
