@@ -9,9 +9,16 @@ cc.Class({
       if (err) {
         console.log(err)
       } else {
-        console.log(obj)
-        cc.director.loadScene("hall")
+        cc.just.http.get('http://localhost:3000/rooms', (err, r) => {
+          if (!err) {
+            console.log(r)
+            cc.just.data.rooms = r
+            cc.director.loadScene("hall")
+          } else {
+            console.error(err)
+          }
+        })
       }
     })
   }
-});
+})

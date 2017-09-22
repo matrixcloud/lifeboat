@@ -9,6 +9,10 @@ cc.Class({
 
   // use this for initialization
   onLoad: function () {
+    if (!cc.just) {
+      cc.director.loadScene('login')
+    }
+
     this.roomNameEditBox.node.on('editing-did-ended', this.handleRoomName, this)
     this.createButton.node.on('click', this.createdRoom, this)
   },
@@ -19,7 +23,9 @@ cc.Class({
   // },
 
   createRoom(e) {
-    cc.just.net.send('create_room', this.createdRoom)
+    cc.just.http.post('http://localhost:3000/rooms', `name=${this.createdRoom}`, (err, obj) => {
+      console.log(obj)
+    })
   },
 
   handleRoomName(e) {

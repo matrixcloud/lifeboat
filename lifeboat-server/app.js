@@ -1,3 +1,5 @@
-const webServer = require('./web-server')
+global.rooms = []
+global.players = []
 
+const webServer = require('./web-server')
 webServer.start()

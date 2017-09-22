@@ -1,4 +1,5 @@
 var Http = cc.Class({
+  extends: cc.Component,
   statics: {
     post(url, formData, cb) {
       const xhr = new XMLHttpRequest()
@@ -20,6 +21,27 @@ var Http = cc.Class({
         }
       }
       xhr.send(formData)
+    },
+
+    get(url, cb) {
+      const xhr = new XMLHttpRequest()
+      xhr.timeout = 5000
+      xhr.open('GET', url)
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          console.log('http response length: ' + xhr.responseText.length)
+          if ((xhr.status >= 200 && xhr.status < 300)) {
+            try {
+              cb(null, JSON.parse(xhr.responseText))
+            } catch(e) {
+              cb(new Error('JSON FORMAT ERROR'), null)
+            }
+          } else {
+            cb(new Error(xhr.status), null)
+          }
+        }
+      }
+      xhr.send()
     }
   }
 })

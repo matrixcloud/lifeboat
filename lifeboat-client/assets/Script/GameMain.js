@@ -2,9 +2,11 @@ function initModules() {
   cc.just = {}
   cc.just.net = require('Net')
   cc.just.net.host = '127.0.0.1:3000'
-  cc.just.net.connect((err, data) => {
-  })
   cc.just.http = require('Http')
+
+  cc.just.data = {
+    rooms: []
+  }
 }
 
 cc.Class({
